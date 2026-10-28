@@ -33,16 +33,16 @@ body { margin: 0; min-height: 100vh; background: var(--night); color: var(--crea
 main { max-width: 560px; margin: 0 auto; padding-bottom: max(40px, env(safe-area-inset-bottom)); }
 
 /* ---- poster: all sizes in cqw so the exported PNG matches any screen ---- */
-.poster { position: relative; container-type: inline-size; aspect-ratio: 4 / 5; overflow: hidden; background: #0B1245; }
+.poster { position: relative; container-type: inline-size; overflow: hidden; background: linear-gradient(180deg, #0B1245 0, #06307F 32cqw, #025392 40cqw); }
+.poster .art { position: relative; margin-top: -4cqw; aspect-ratio: 4 / 5; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12%); mask-image: linear-gradient(180deg, transparent 0, #000 12%); }
 .poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.poster::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(8,14,60,.35) 0%, rgba(8,14,60,.25) 30%, transparent 42%); }
-.title { position: absolute; z-index: 2; top: 8cqw; right: 17cqw; width: 50cqw; text-align: center; text-shadow: 0 .4cqw 2cqw rgba(5,8,40,.8); }
-.title .l1 { display: block; font-family: var(--script); font-size: 11.5cqw; line-height: 1; color: var(--cream); }
-.title .l2 { display: block; font-family: var(--script); font-size: 17cqw; line-height: .85; color: var(--gold); }
-.title .rule { display: flex; align-items: center; gap: 2cqw; margin: 2.2cqw auto 1.8cqw; width: 80%; color: var(--gold); }
+.title { position: relative; z-index: 2; padding: 9cqw 5cqw 0; text-align: center; text-shadow: 0 .4cqw 2cqw rgba(5,8,40,.6); }
+.title .l1 { display: block; font-family: var(--script); font-size: 13cqw; line-height: 1; color: var(--cream); }
+.title .l2 { display: block; font-family: var(--script); font-size: 20cqw; line-height: .85; color: var(--gold); }
+.title .rule { display: flex; align-items: center; gap: 2cqw; margin: 2.2cqw auto 1.8cqw; width: 60%; color: var(--gold); }
 .title .rule::before, .title .rule::after { content: ""; flex: 1; height: .25cqw; background: currentColor; opacity: .8; }
 .title .rule i { width: 1.8cqw; height: 1.8cqw; background: currentColor; transform: rotate(45deg); }
-.title .when { margin: 0; font-size: 3.7cqw; line-height: 1.35; font-weight: 500; }
+.title .when { margin: 0; font-size: 4cqw; line-height: 1.35; font-weight: 500; }
 .title .when sup { font-size: .6em; }
 .title .when b { font-weight: 600; color: var(--gold); }
 .js .title > * { opacity: 0; transform: translateY(2cqw); animation: rise .9s cubic-bezier(.16,1,.3,1) forwards; }
@@ -72,13 +72,13 @@ dd small { display: block; margin-top: 4px; font-style: italic; font-size: 15px;
 <body>
 <main>
   <div class="poster" id="poster">
-    <img src="art.jpg" alt="Friends on a lantern-lit rooftop at night, playing cards, eating mithai and listening to live music under fairy lights">
     <div class="title">
       <span class="l1">Ghar Waali</span>
       <span class="l2">Diwali</span>
       <div class="rule" aria-hidden="true"><i></i></div>
-      <p class="when">Friday, 30<sup>th</sup> October<br><b>8 PM onwards</b></p>
+      <p class="when">Friday, 30<sup>th</sup> October &nbsp;·&nbsp; <b>8 PM onwards</b></p>
     </div>
+    <div class="art"><img src="art.jpg" alt="Friends on a lantern-lit rooftop at night, playing cards, eating mithai and listening to live music under fairy lights"></div>
   </div>
 
   <section class="card" aria-labelledby="t">
