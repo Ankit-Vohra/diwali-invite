@@ -410,14 +410,36 @@ footer .tag { font-family: var(--body); text-transform: none; letter-spacing: 0;
 footer .made { font-family: var(--editorial); font-style: italic; color: rgba(255,240,210,.9); }
 
 /* ======================= CREDITS ======================= */
-.credits { position: relative; z-index: 1; margin-top: 96px; }
-.credits h3 { font-family: var(--display); font-weight: 900; text-transform: uppercase; line-height: .86; font-size: clamp(2.6rem, 9vw, 4.6rem); }
-.credits h3 .ed { color: var(--haldi); }
-.credits-grid { margin: 28px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 2px dashed rgba(255,240,210,.4); }
-@media (min-width: 768px) { .credits-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.credits-grid > div { padding: 18px 12px 18px 0; border-bottom: 2px dashed rgba(255,240,210,.4); }
-.credits-grid dt { font-family: var(--display); font-weight: 800; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--haldi); }
-.credits-grid dd { margin: 4px 0 0; font-family: var(--display); font-weight: 900; text-transform: uppercase; line-height: 1; font-size: clamp(1.4rem, 5.2vw, 2rem); overflow-wrap: anywhere; }
+.credits { position: relative; z-index: 1; margin-top: 112px; padding: 40px 0 8px; text-align: center; overflow: hidden; }
+.rangoli { position: absolute; left: 50%; top: 150px; width: min(130vw, 760px); aspect-ratio: 1; translate: -50% -50%; color: var(--haldi); opacity: .55; pointer-events: none; animation: spin 120s linear infinite; }
+.rangoli * { fill: none; stroke: currentColor; stroke-width: 1.1; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.6s cubic-bezier(.65,0,.35,1); }
+.rangoli .g2 { color: var(--cream); } .rangoli .g3 { color: var(--gulabi); }
+.rangoli .dot { fill: currentColor; stroke: none; opacity: 0; transition: opacity .6s ease 1.8s; }
+.credits.in .rangoli * { stroke-dashoffset: 0; } .credits.in .rangoli .dot { opacity: 1; }
+.credits-kicker { position: relative; font-family: var(--editorial); font-style: italic; font-weight: 700; font-size: clamp(20px, 5vw, 30px); }
+.you { position: relative; display: flex; justify-content: center; gap: .02em; margin: 6px 0 0; font-family: var(--display); font-weight: 900; text-transform: uppercase; line-height: .82; font-size: clamp(8rem, 38vw, 17rem); color: var(--haldi); -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; text-shadow: .045em .045em 0 var(--ink); }
+.you span { display: inline-block; }
+.js .credits:not(.in) .you span { opacity: 0; transform: translateY(40%) scale(.3) rotate(-14deg); }
+.you span { transition: opacity .3s, transform .9s cubic-bezier(.34,1.7,.5,1); }
+.credits.in .you span:nth-child(2) { transition-delay: .14s; } .credits.in .you span:nth-child(3) { transition-delay: .28s; }
+.credits.in .you span { animation: bob 2.8s ease-in-out 1.3s infinite; }
+.credits.in .you span:nth-child(2) { animation-delay: 1.5s; } .credits.in .you span:nth-child(3) { animation-delay: 1.7s; }
+@keyframes bob { 0%,100% { transform: none; } 50% { transform: translateY(-5%) rotate(-2deg); } }
+.you-sub { position: relative; margin-top: 18px; font-weight: 700; font-size: 16px; transition: opacity .6s ease .8s; }
+.amp { position: relative; margin: 26px auto 0; width: 92px; height: 92px; display: grid; place-items: center; border-radius: 50%; background: var(--cream); color: var(--lacquer); border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink); font-family: var(--editorial); font-style: italic; font-weight: 900; font-size: 64px; line-height: 1; transition: transform 1s cubic-bezier(.34,1.56,.64,1) 1s, opacity .4s ease 1s; }
+.js .credits:not(.in) .amp, .js .credits:not(.in) .you-sub { opacity: 0; } .js .credits:not(.in) .amp { transform: rotate(-200deg) scale(.2); }
+.credits-grid { position: relative; margin: 36px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; border-top: 2px dashed rgba(255,240,210,.4); }
+@media (min-width: 900px) { .credits-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.credits-grid > div { padding: 18px 4px; border-bottom: 2px dashed rgba(255,240,210,.4); transition: opacity .6s ease, transform .7s cubic-bezier(.16,1,.3,1); transition-delay: calc(1.4s + var(--i, 0) * 90ms); }
+.js .credits:not(.in) .credits-grid > div { opacity: 0; transform: translateY(24px); }
+.credits-grid dt { font-family: var(--display); font-weight: 800; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--haldi); }
+.credits-grid dd { margin: 6px 0 0; font-family: var(--display); font-weight: 900; text-transform: uppercase; line-height: 1; font-size: clamp(1.3rem, 5vw, 1.8rem); overflow-wrap: anywhere; }
+
+/* ======================= CRACKERS ======================= */
+.crackers { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 45; }
+.js .ticket .row { opacity: 0; transform: translateX(-16px); transition: opacity .5s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+.ticket.in .row { opacity: 1; transform: none; }
+.ticket.in .row:nth-child(2) { transition-delay: .1s; } .ticket.in .row:nth-child(3) { transition-delay: .2s; } .ticket.in .row:nth-child(4) { transition-delay: .3s; } .ticket.in .row:nth-child(5) { transition-delay: .4s; }
 
 /* ======================= RSVP DIALOG ======================= */
 .scrim { position: fixed; inset: 0; z-index: 90; background: rgba(23,23,20,.6); opacity: 0; transition: opacity .2s; }
@@ -707,9 +729,12 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
         <svg class="summary-mg" id="summary-mg" aria-hidden="true"><use href="#i-marigold"></use></svg>
       </div>
     </div>
-    <section class="credits up" aria-labelledby="credits-t">
-      <div class="eyebrow"><span class="num">✦</span><span>Credits</span></div>
-      <h3 id="credits-t">This party is <span class="ed">brought to you by</span></h3>
+    <section class="credits" id="credits-sec" aria-labelledby="credits-t">
+      <svg class="rangoli" id="rangoli" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
+      <p class="credits-kicker" id="credits-t">This party is brought to you by</p>
+      <h3 class="you" id="you"><span>Y</span><span>O</span><span>U</span></h3>
+      <p class="you-sub" id="you-sub">Yes, you. No you, no party.</p>
+      <p class="amp" aria-label="and">&amp;</p>
       <dl class="credits-grid" id="credits"></dl>
     </section>
     <footer class="site">
@@ -845,6 +870,61 @@ const CONFIG = {
   const fc = document.createElement("canvas"); fc.setAttribute("aria-hidden", "true"); fc.style.cssText = "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:95"; document.body.appendChild(fc);
   const floatL = layer(fc); const pop = (x, y, n) => floatL.burst(x, y, n || 60, 10);
 
+  /* ---------- crackers: rockets, anaar and chakri from the bottom of the screen ---------- */
+  const crackers = (() => {
+    const cv = document.createElement("canvas"); cv.className = "crackers"; cv.setAttribute("aria-hidden", "true"); document.body.appendChild(cv);
+    const ctx = cv.getContext("2d"); let W = 0, H = 0, raf = 0, timer = 0, on = false; const P = [], F = [];
+    const size = () => { const d = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); };
+    size(); addEventListener("resize", size);
+    const PAL = ["#FFC928", "#F22978", "#FFF0D2", "#F47721", "#7CE0C3"], R = (a, b) => a + Math.random() * (b - a), pick = (a) => a[Math.floor(Math.random() * a.length)];
+    const spark = (x, y, vx, vy, life, c, g, s, dr) => { if (P.length < 1100) P.push({ x, y, vx, vy, life, max: life, c, g, s, dr }); };
+    function rocket(x, ty) {
+      x = x ?? R(.12, .88) * W; ty = ty ?? R(.16, .42) * H; const c = pick(PAL), c2 = pick(PAL), N = Math.round(R(48, 62)), y0 = H + 12, sx = x + R(-40, 40); let k = 0;
+      F.push(() => { k++; const e = 1 - Math.pow(1 - k / N, 2.2), y = y0 + (ty - y0) * e, xx = sx + (x - sx) * e;
+        spark(xx + R(-1.5, 1.5), y + 6, R(-.4, .4), R(.6, 1.6), R(18, 30), "#FFE7A0", .03, 1.6, .96);
+        ctx.fillStyle = "#FFF6D8"; ctx.beginPath(); ctx.arc(xx, y, 2.6, 0, 7); ctx.fill();
+        if (k < N) return true;
+        const n = Math.round(R(60, 90)), v = R(3.2, 4.6);
+        for (let i = 0; i < n; i++) { const a = i / n * 6.283 + R(-.08, .08), vv = v * R(.55, 1); spark(x, ty, Math.cos(a) * vv, Math.sin(a) * vv, R(60, 95), i % 3 ? c : c2, .045, R(1.6, 2.6), .968); }
+        for (let i = 0; i < 18; i++) { const a = R(0, 6.283), vv = R(.5, 1.6); spark(x, ty, Math.cos(a) * vv, Math.sin(a) * vv, R(30, 50), "#FFFFFF", .02, 1.4, .97); }
+        return false; });
+    }
+    function anaar(x) {
+      x = x ?? R(.12, .88) * W; const N = 260; let k = 0;
+      F.push(() => { k++; const rise = Math.min(1, k / 22, (N - k) / 22), by = H + 44 * (1 - Math.max(0, rise)), amt = Math.pow(Math.sin(Math.PI * Math.min(1, k / N)), .6);
+        for (let i = 0; i < 7 * amt; i++) { const a = -Math.PI / 2 + R(-.3, .3), v = R(5.5, 11) * (.55 + .45 * amt); spark(x + R(-3, 3), by - 38, Math.cos(a) * v, Math.sin(a) * v, R(45, 75), pick(["#FFC928", "#FFF0D2", "#FFE7A0", "#F47721"]), .17, R(1.1, 2.1), .99); }
+        const g = ctx.createRadialGradient(x, by - 38, 0, x, by - 38, 70); g.addColorStop(0, `rgba(255,214,120,${.5 * amt})`); g.addColorStop(1, "rgba(255,214,120,0)"); ctx.fillStyle = g; ctx.fillRect(x - 70, by - 108, 140, 140);
+        ctx.beginPath(); ctx.moveTo(x - 19, by); ctx.lineTo(x + 19, by); ctx.lineTo(x + 4, by - 38); ctx.lineTo(x - 4, by - 38); ctx.closePath(); ctx.fillStyle = "#B5461E"; ctx.fill(); ctx.lineWidth = 2.5; ctx.strokeStyle = "#171714"; ctx.stroke();
+        ctx.fillStyle = "#FFC928"; ctx.fillRect(x - 13, by - 18, 26, 5); ctx.fillStyle = "#075B36"; ctx.fillRect(x - 9, by - 29, 18, 4);
+        return k < N; });
+    }
+    function chakri(x) {
+      x = x ?? R(.15, .85) * W; const N = 230, dir = Math.random() < .5 ? -1 : 1, cols = pick([["#FFC928", "#7CE0C3"], ["#FFC928", "#F22978"], ["#FFF0D2", "#F47721"]]); let k = 0, rot = 0;
+      F.push(() => { k++; rot += .42; x += dir * .55; const y = H - 22, amt = Math.min(1, k / 15, (N - k) / 20);
+        for (let j = 0; j < 2; j++) { const t = rot + j * Math.PI, ex = x + Math.cos(t) * 15, ey = y + Math.sin(t) * 15;
+          for (let i = 0; i < 4 * amt; i++) { const v = R(3, 6.5); spark(ex, ey, -Math.sin(t) * v, Math.cos(t) * v - R(.5, 2), R(26, 46), cols[(i + j) % 2], .09, R(1.2, 2), .975); } }
+        const g = ctx.createRadialGradient(x, y, 0, x, y, 80); g.addColorStop(0, `rgba(255,200,90,${.45 * amt})`); g.addColorStop(1, "rgba(255,200,90,0)"); ctx.fillStyle = g; ctx.fillRect(x - 80, y - 80, 160, 160);
+        ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.lineWidth = 3; ctx.strokeStyle = "#171714"; ctx.fillStyle = "#D92720"; ctx.beginPath(); ctx.arc(0, 0, 13, 0, 7); ctx.fill(); ctx.stroke();
+        ctx.strokeStyle = "#FFC928"; ctx.lineWidth = 2.2; ctx.beginPath(); for (let a = 0; a < 12; a += .3) { const r = 2 + a * .85; ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r); } ctx.stroke(); ctx.restore();
+        return k < N; });
+    }
+    function tick() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = P.length - 1; i >= 0; i--) { const p = P[i]; p.vx *= p.dr; p.vy = p.vy * p.dr + p.g; p.x += p.vx; p.y += p.vy; if (--p.life <= 0 || p.y > H + 20) { P.splice(i, 1); continue; }
+        ctx.globalAlpha = Math.min(1, p.life / p.max * 1.4) * (p.life < 20 ? .5 + .5 * Math.random() : 1); ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, 7); ctx.fill(); }
+      ctx.globalAlpha = 1;
+      for (let i = F.length - 1; i >= 0; i--) if (!F[i]()) F.splice(i, 1);
+      raf = P.length || F.length ? requestAnimationFrame(tick) : 0;
+    }
+    const go = (fn) => (...a) => { if (reduce) return; fn(...a); if (!raf) raf = requestAnimationFrame(tick); };
+    const api = { rocket: go(rocket), anaar: go(anaar), chakri: go(chakri) };
+    api.show = () => { [0, 350, 800, 1200].forEach((d, i) => setTimeout(() => api.rocket(W * (.2 + i * .2) + R(-30, 30)), d)); setTimeout(() => api.anaar(W * .18), 300); setTimeout(() => api.chakri(W * .8), 600); };
+    // ambient: every 7-14 s one cracker, only when the tab is visible and the RSVP dialog is closed
+    const next = () => { timer = setTimeout(() => { if (!document.hidden && $("#dialog").hidden) { const r = Math.random(); if (r < .45) { const n = Math.random() < .35 ? 3 : 1; for (let i = 0; i < n; i++) setTimeout(() => api.rocket(), i * 380); } else if (r < .75) api.anaar(); else api.chakri(); } next(); }, R(7000, 14000)); };
+    api.start = () => { if (on || reduce) return; on = true; api.anaar(W * .22); setTimeout(() => api.chakri(W * .74), 500); setTimeout(() => api.rocket(W * .5), 1300); next(); };
+    return api;
+  })();
+
   /* ---------- smooth scroll ---------- */
   let lenis = null;
   if (!reduce && window.Lenis) { try { lenis = new Lenis({ lerp: .1, smoothWheel: true }); const loop = (t) => { lenis.raf(t); requestAnimationFrame(loop); }; requestAnimationFrame(loop); lenis.stop(); } catch (e) { lenis = null; } }
@@ -878,6 +958,7 @@ const CONFIG = {
     if (lenis) { lenis.start(); lenis.scrollTo(0, { immediate: true }); } else scrollTo(0, 0);
     setTimeout(() => { rail.classList.add("show"); renderPills(); }, reduce ? 0 : 450);
     setTimeout(() => { archWrap.classList.add("on"); playVid(); }, reduce ? 0 : 500);
+    setTimeout(() => crackers.start(), 1600);
     setTimeout(() => { gate.hidden = true; if (!opened) { opened = true; watch(); } const t = $("#invite-title"); t.setAttribute("tabindex", "-1"); t.focus({ preventScroll: true }); }, reduce ? 0 : 900);
   }
   function light() {
@@ -1053,7 +1134,7 @@ const CONFIG = {
       wa.classList.remove("haldi"); wa.lastChild.textContent = "Also ping on WhatsApp";
     } catch (e) { setSend("bad", "Couldn't send from here. Send it on WhatsApp instead:"); wa.classList.add("haldi"); wa.lastChild.textContent = "Send on WhatsApp"; }
   }
-  function finish() { R.submitted = true; save(); showStep(4); sendEmail(); renderSummary(); done.add("finale"); renderPills(); const r = dlg.getBoundingClientRect(); pop(r.left + r.width / 2, r.top + 120, 130); $("#wa").focus(); }
+  function finish() { R.submitted = true; save(); showStep(4); sendEmail(); renderSummary(); done.add("finale"); renderPills(); const r = dlg.getBoundingClientRect(); pop(r.left + r.width / 2, r.top + 120, 130); crackers.show(); $("#wa").focus(); }
   $("#edit-rsvp").addEventListener("click", () => { R.submitted = false; R.sent = false; setSend("", ""); save(); nameMode(false); showStep(0); renderSummary(); (R.name.trim() ? stEl.firstChild : nameIn).focus(); });
   $("#copy-rsvp").addEventListener("click", () => copyText(rsvpText(), $("#copy-status")));
 
@@ -1072,13 +1153,20 @@ const CONFIG = {
 
   // partners
   const PARTNERS = [["Venue partner", "Daujee"], ["Event partner", "1857"], ["Insurance partner", "Sahi Bima"], ["Tech partner", "Allevia AI"], ["Furniture partner", "Qraa"], ["Decor partner", "Grace Floral"], ["Gifting partner", "Quem"], ["Accessories partner", "Solt"], ["Steel partner", "Sky TMT"], ["Reliable partner", "Reliable Industrial Solutions"]];
-  PARTNERS.forEach(([k, v]) => { const d = document.createElement("div"), dt = document.createElement("dt"), dd = document.createElement("dd"); dt.textContent = k; dd.textContent = v; d.append(dt, dd); $("#credits").appendChild(d); });
+  PARTNERS.forEach(([k, v], i) => { const d = document.createElement("div"), dt = document.createElement("dt"), dd = document.createElement("dd"); d.style.setProperty("--i", i); dt.textContent = k; dd.textContent = v; d.append(dt, dd); $("#credits").appendChild(d); });
+  // hand-drawn rangoli behind YOU: petal rings that draw themselves in
+  const rg = $("#rangoli"), petal = (r1, r2, w) => `M0 ${-r1} C${w} ${-(r1 + (r2 - r1) * .3)} ${w} ${-(r1 + (r2 - r1) * .75)} 0 ${-r2} C${-w} ${-(r1 + (r2 - r1) * .75)} ${-w} ${-(r1 + (r2 - r1) * .3)} 0 ${-r1}Z`;
+  [[8, 14, 46, 13, "g1"], [12, 48, 72, 11, "g2"], [16, 72, 90, 8, "g3"]].forEach(([n, r1, r2, w, c]) => { const g = el("g", { class: c }, rg); for (let i = 0; i < n; i++) el("path", { d: petal(r1, r2, w), transform: `rotate(${i * 360 / n})`, pathLength: 1 }, g); });
+  el("circle", { r: 10, pathLength: 1 }, rg); el("circle", { r: 96, pathLength: 1, class: "g2" }, rg);
+  for (let i = 0; i < 32; i++) { const a = i / 32 * 6.283; el("circle", { class: "dot", cx: (Math.cos(a) * 93).toFixed(2), cy: (Math.sin(a) * 93).toFixed(2), r: 1.6 }, rg); }
+  const credSec = $("#credits-sec");
+  new IntersectionObserver((es, ob) => es.forEach((e) => { if (!e.isIntersecting) return; ob.disconnect(); const nm = R.name.trim(); $("#you-sub").textContent = nm ? `Yes, you, ${nm}. No you, no party.` : "Yes, you. No you, no party."; credSec.classList.add("in"); setTimeout(() => crackers.show(), 500); }), { threshold: .6 }).observe($("#you"));
 
   // arch video: plays once the diya is lit, pauses off-screen, tap for sparkles
   const vid = $("#heap"), archWrap = $(".arch-wrap");
   const playVid = () => { if (!reduce) { const p = vid.play(); if (p && p.catch) p.catch(() => {}); } };
   new IntersectionObserver((es) => es.forEach((e) => { if (!opened) return; e.isIntersecting ? playVid() : vid.pause(); }), { threshold: .15 }).observe(vid);
-  const sparkle = (e) => { const r = $(".arch").getBoundingClientRect(), x = e && e.clientX ? e.clientX : r.left + r.width / 2, y = e && e.clientY ? e.clientY : r.top + r.height * .3; pop(x, y, 70); };
+  const sparkle = (e) => { const r = $(".arch").getBoundingClientRect(), x = e && e.clientX ? e.clientX : r.left + r.width / 2, y = e && e.clientY ? e.clientY : r.top + r.height * .3; reduce ? pop(x, y, 70) : crackers.rocket(x, y); };
   $(".arch").addEventListener("click", sparkle); $("#spark-btn").addEventListener("click", (e) => { e.stopPropagation(); sparkle(); });
 
   // countdown to start
