@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- Diwali reveal: 9s seamless loop, 1080x1350. Everything is a pure function of seek(t) (HyperFrames render contract:
+     no Date.now, no unseeded random, no timers). -->
+<style>
+  html, body { margin: 0; background: #0b1245; overflow: hidden; }
+  #stage { position: relative; width: 1080px; height: 1350px; overflow: hidden; }
+  #cam { position: absolute; inset: 0; transform-origin: 50% 62%; will-change: transform; }
+  #cam img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  #fx { position: absolute; inset: 0; width: 1080px; height: 1350px; }
+</style>
+</head>
+<body>
+<div id="stage" data-duration="9" data-width="1080" data-height="1350" data-fps="24">
+  <div id="cam"><img id="art" src="../assets/art.jpg" alt=""><canvas id="fx" width="1080" height="1350"></canvas></div>
+</div>
+<script>
+const D = 9, S = 1080 / 896, TAU = Math.PI * 2;
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const cam = document.getElementById("cam"), cv = document.getElementById("fx"), ctx = cv.getContext("2d");
+
+/* light sprites: soft radial gradients, pre-rendered once */
+const sprite = (rgb) => { const c = document.createElement("canvas"); c.width = c.height = 128; const g = c.getContext("2d"), r = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  r.addColorStop(0, `rgba(${rgb},1)`); r.addColorStop(.25, `rgba(${rgb},.55)`); r.addColorStop(1, `rgba(${rgb},0)`); g.fillStyle = r; g.fillRect(0, 0, 128, 128); return c; };
+const SP = { warm: sprite("255,190,90"), gold: sprite("255,214,100"), white: sprite("255,244,200"), pink: sprite("255,80,150"), saffron: sprite("255,130,40"), moon: sprite("255,230,150") };
+const glow = (sp, x, y, r, a) => { ctx.globalAlpha = Math.max(0, Math.min(1, a)); ctx.drawImage(sp, x * S - r, y * S - r, r * 2, r * 2); };
+
+/* art-space coordinates (896x1120) of the lanterns and fairy-light bulbs in the illustration */
+const LANT = [[157,388],[543,437],[853,428],[121,538],[145,598],[47,668],[487,562],[523,567],[713,610],[408,678],[601,768],[777,835],[109,898],[757,1012],[815,1040]];
+const BULB = [[18,207],[75,190],[111,182],[165,160],[210,134],[272,62],[243,254],[269,270],[308,293],[349,310],[388,328],[429,343],[467,355],[505,367],[542,381],[576,393],[605,405],[640,413],[680,423],[718,430],[752,433],[794,436],[826,436]];
+const TINY = Array.from({ length: 46 }, () => [150 + rnd() * 730, 330 + rnd() * 200, rnd(), 1 + Math.floor(rnd() * 3)]);
+const STAR = Array.from({ length: 70 }, () => [330 + rnd() * 566, rnd() * 240, rnd(), 1 + Math.floor(rnd() * 3)]);
+const EMBER = Array.from({ length: 34 }, () => [rnd() * 896, rnd(), 8 + rnd() * 22, rnd() * TAU, 1.6 + rnd() * 2.2, rnd() < .5 ? 2 : 1]);
+
+/* fireworks: [start s, x, y, sprite, particles] -- all done before 9s so the loop is seamless */
+const FW = [[1.0, 640, 120, "gold", 46], [2.5, 520, 175, "pink", 40], [3.9, 790, 205, "saffron", 44], [5.3, 610, 70, "gold", 54], [6.6, 450, 115, "pink", 42]];
+const FWP = FW.map(([, , , , n]) => Array.from({ length: n }, (_, i) => [i / n * TAU + (rnd() - .5) * .22, 130 + rnd() * 150, rnd() * .5]));
+const LIFE = 2.1, K = 1.7, G = 70;
+
+function fireworks(t) {
+  FW.forEach(([t0, x, y, col, n], b) => {
+    const rk = t0 - .6;                       // rocket rises for 0.6s then bursts
+    if (t >= rk && t < t0) { const u = (t - rk) / .6, e = 1 - (1 - u) * (1 - u), ry = y + 420 * (1 - e), rx = x + 14 * (1 - e);
+      for (let k = 0; k < 7; k++) { const uu = Math.max(0, u - k * .035), ee = 1 - (1 - uu) * (1 - uu); glow(SP.white, x + 14 * (1 - ee), y + 420 * (1 - ee), 14 - k * 1.5, (1 - k / 7) * .9); }
+      glow(SP.white, rx, ry, 22, 1); }
+    const a = t - t0; if (a < 0 || a > LIFE + .5) return;
+    if (a < .22) glow(SP[col], x, y, 230 * (1 - a / .22) + 40, (1 - a / .22) * .8); // flash
+    FWP[b].forEach(([ang, v, d]) => {
+      const age = a - d * .12; if (age <= 0 || age > LIFE) return;
+      const fade = Math.pow(1 - age / LIFE, 1.4) * (.75 + .25 * Math.sin((age + d) * 38));
+      for (let k = 0; k < 5; k++) { const ag = Math.max(0, age - k * .03), r = v * (1 - Math.exp(-K * ag)) / K;
+        glow(SP[col], x + Math.cos(ang) * r, y + Math.sin(ang) * r + .5 * G * ag * ag, 16 - k * 2.4, fade * (1 - k / 5)); }
+      const r0 = v * (1 - Math.exp(-K * age)) / K; glow(SP.white, x + Math.cos(ang) * r0, y + Math.sin(ang) * r0 + .5 * G * age * age, 10, fade);
+    });
+  });
+}
+
+function draw(t) {
+  ctx.globalCompositeOperation = "source-over"; ctx.clearRect(0, 0, 1080, 1350); ctx.globalCompositeOperation = "lighter";
+  const w = TAU / D;
+  // stars twinkle (integer cycles over the loop)
+  STAR.forEach(([x, y, ph, k]) => glow(SP.white, x, y, 3 + ph * 3, .25 + .35 * Math.max(0, Math.sin(w * k * t + ph * TAU))));
+  // moon breathes
+  glow(SP.moon, 703, 108, 120 * S / 1.2, .30 + .12 * Math.sin(w * t));
+  // fairy-light string: each bulb pulses on its own phase
+  BULB.forEach(([x, y], i) => glow(SP.gold, x, y, 30, .55 + .35 * Math.sin(w * 2 * t + i * 1.7)));
+  TINY.forEach(([x, y, ph, k]) => glow(SP.gold, x, y, 11, .15 + .5 * Math.max(0, Math.sin(w * k * 2 * t + ph * TAU))));
+  // lantern flames flicker (sum of integer-cycle sines, so it loops)
+  LANT.forEach(([x, y], i) => { const f = .55 + .18 * Math.sin(w * 7 * t + i) + .12 * Math.sin(w * 13 * t + i * 2.3) + .08 * Math.sin(w * 23 * t + i * .7); glow(SP.warm, x, y, 62, f); glow(SP.saffron, x, y, 120, f * .22); });
+  // embers drift up from the lanterns (period 9s / 2 so it also loops)
+  EMBER.forEach(([x, ph, sway, sp, size, c]) => { const u = (t / (D / c) + ph) % 1, ey = 1120 - u * 560, ex = x + Math.sin(u * TAU * 1.5 + sp) * sway;
+    glow(SP.saffron, ex, ey, size * 4, Math.sin(u * Math.PI) * .9); });
+  fireworks(t);
+  ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+}
+
+window.seek = (t) => {
+  t = ((t % D) + D) % D; const c = (1 - Math.cos(t * TAU / D)) / 2;
+  cam.style.transform = `translate(${(Math.sin(t * TAU / D) * 9).toFixed(2)}px, ${(-16 * c).toFixed(2)}px) scale(${(1 + .055 * c).toFixed(4)})`;
+  draw(t);
+};
+const img = document.getElementById("art");
+(img.complete ? Promise.resolve() : new Promise((r) => (img.onload = r))).then(() => img.decode()).then(() => { window.seek(0); window.__ready = true; });
+</script>
+</body>
+</html>

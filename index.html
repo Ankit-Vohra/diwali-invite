@@ -1,11 +1,11 @@
 <!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <title>Diwali Dhamaka</title>
-<meta name="description" content="Ghar pe Diwali Dhamaka. 30 October, 8 PM onwards, Raipur. Light the diya, pick your fit, and RSVP.">
+<meta name="description" content="Ghar pe Diwali Dhamaka. 30 October, 8 PM onwards, Raipur. Party Pot ₹3,500 per person. Light the diya, pick your fit, and RSVP.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#D92720">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Diwali Dhamaka: tu invited hai!">
-<meta property="og:description" content="Friday 30 Oct, 8 PM onwards, Daujee's Civil Lines, Raipur. Diyas, desi bangers, karaoke and midnight cake.">
+<meta property="og:description" content="Friday 30 Oct, 8 PM onwards, Daujee's Civil Lines, Raipur. Party Pot ₹3,500 per person. Diyas, desi bangers, karaoke and midnight cake.">
 <meta property="og:image" content="https://ankit-vohra.github.io/diwali-invite/og.png">
 <meta property="og:url" content="https://ankit-vohra.github.io/diwali-invite/">
 <meta name="twitter:card" content="summary_large_image">
@@ -185,13 +185,18 @@ svg { display: block; }
 @media (min-width: 400px) { .poster-meta .mid { display: inline; } }
 @media (min-width: 640px) { .poster-meta { font-size: 14px; } }
 .arch-wrap { position: relative; margin-top: 16px; }
-.arch { position: relative; aspect-ratio: 5 / 4; border: 3px solid var(--ink); border-radius: 999px 999px 18px 18px; overflow: hidden; background: #C2410C; }
-@media (min-width: 640px) { .arch { aspect-ratio: 16 / 10; } }
-.arch .heap { position: absolute; left: 0; width: 100%; height: 136%; top: -18%; will-change: transform; }
-.arch .tint { position: absolute; inset: 0; background: var(--lacquer); mix-blend-mode: multiply; opacity: .25; }
-.arch .vig { position: absolute; inset: 0; background: radial-gradient(at 50% 35%, transparent 25%, rgba(23,23,20,.6) 100%); }
+.arch { position: relative; aspect-ratio: 4 / 5; border: 3px solid var(--ink); border-radius: 999px 999px 18px 18px; overflow: hidden; background: #C2410C; }
+.arch .heap { position: absolute; left: 0; width: 100%; height: 116%; top: -8%; object-fit: cover; will-change: transform; }
+.arch .lights { position: absolute; inset: 0; background: #0b1245; opacity: 1; transition: opacity 2.2s ease .4s; pointer-events: none; }
+.arch-wrap.on .lights { opacity: 0; }
+.arch-wrap:not(.on) .heap { filter: brightness(.6) saturate(.8); }
+.arch .heap { transition: filter 2s ease .4s; }
+.arch .vig { position: absolute; inset: 0; background: radial-gradient(at 50% 40%, transparent 45%, rgba(11,18,69,.45) 100%); pointer-events: none; }
 .arch-tag { position: absolute; left: -4px; top: 20px; rotate: -8deg; background: var(--gulabi); font-size: 16px; z-index: 2; }
 @media (min-width: 640px) { .arch-tag { left: -16px; } }
+.spark-btn { position: absolute; left: 50%; bottom: 14px; translate: -50% 0; z-index: 3; white-space: nowrap; font-size: 12px; background: var(--haldi); cursor: pointer; transition: transform .15s; }
+.spark-btn:hover { transform: translateY(-2px); }
+.arch { cursor: pointer; }
 .arch-spark { position: absolute; right: 24px; top: -12px; width: 40px; height: 40px; z-index: 2; }
 .arch-mg { position: absolute; right: -12px; bottom: -24px; width: 80px; height: 80px; z-index: 2; }
 .reveal h2 { margin-top: 32px; font-size: clamp(3rem, 13.5vw, 6.4rem); }
@@ -404,6 +409,16 @@ footer .logo svg { width: 40px; height: 40px; }
 footer .tag { font-family: var(--body); text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 14px; color: rgba(255,240,210,.9); margin-top: 4px; }
 footer .made { font-family: var(--editorial); font-style: italic; color: rgba(255,240,210,.9); }
 
+/* ======================= CREDITS ======================= */
+.credits { position: relative; z-index: 1; margin-top: 96px; }
+.credits h3 { font-family: var(--display); font-weight: 900; text-transform: uppercase; line-height: .86; font-size: clamp(2.6rem, 9vw, 4.6rem); }
+.credits h3 .ed { color: var(--haldi); }
+.credits-grid { margin: 28px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 2px dashed rgba(255,240,210,.4); }
+@media (min-width: 768px) { .credits-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.credits-grid > div { padding: 18px 12px 18px 0; border-bottom: 2px dashed rgba(255,240,210,.4); }
+.credits-grid dt { font-family: var(--display); font-weight: 800; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--haldi); }
+.credits-grid dd { margin: 4px 0 0; font-family: var(--display); font-weight: 900; text-transform: uppercase; line-height: 1; font-size: clamp(1.4rem, 5.2vw, 2rem); overflow-wrap: anywhere; }
+
 /* ======================= RSVP DIALOG ======================= */
 .scrim { position: fixed; inset: 0; z-index: 90; background: rgba(23,23,20,.6); opacity: 0; transition: opacity .2s; }
 .scrim.open { opacity: 1; }
@@ -565,7 +580,8 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
           <div class="poster-in">
             <div class="poster-meta"><span>No. 001</span><span class="mid">Ghar pe edition</span><span>Limited print</span></div>
             <div class="arch-wrap">
-              <div class="arch" aria-hidden="true"><svg class="heap" id="heap" viewBox="0 0 400 340" preserveAspectRatio="xMidYMid slice"></svg><div class="tint"></div><div class="vig"></div></div>
+              <div class="arch" aria-hidden="true"><video class="heap" id="heap" src="assets/reveal.mp4" poster="assets/art.jpg" muted loop playsinline preload="auto" disablepictureinpicture></video><div class="lights"></div><div class="vig"></div></div>
+              <button type="button" class="sticker spark-btn" id="spark-btn">Tap for sparkle ✦</button>
               <span class="sticker arch-tag">Ghar pe Diwali hai.</span>
               <svg class="arch-spark" aria-hidden="true" style="fill: var(--haldi); stroke: var(--ink); stroke-width: 2"><use href="#i-spark"></use></svg>
               <svg class="arch-mg" aria-hidden="true"><use href="#i-marigold"></use></svg>
@@ -584,6 +600,7 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
             <div class="row"><dt>Event</dt><dd>Diwali Dhamaka, ghar pe</dd></div>
             <div class="row"><dt>Date</dt><dd data-cfg="date">Friday, 30 October 2026</dd></div>
             <div class="row"><dt>Time</dt><dd><span data-cfg="time">8:00 PM onwards</span><small class="foot" data-cfg="timeNote"></small></dd></div>
+            <div class="row"><dt>Party Pot</dt><dd data-cfg="pot">₹3,500 per person</dd></div>
             <div class="row"><dt>Venue</dt><dd><span data-cfg="venue">6th Floor, Daujee's, Civil Lines, Raipur</span><small class="foot" data-cfg="venueNote"></small></dd></div>
           </dl>
         </div>
@@ -690,6 +707,11 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
         <svg class="summary-mg" id="summary-mg" aria-hidden="true"><use href="#i-marigold"></use></svg>
       </div>
     </div>
+    <section class="credits up" aria-labelledby="credits-t">
+      <div class="eyebrow"><span class="num">✦</span><span>Credits</span></div>
+      <h3 id="credits-t">This party is <span class="ed">brought to you by</span></h3>
+      <dl class="credits-grid" id="credits"></dl>
+    </section>
     <footer class="site">
       <div class="logo" style="align-items: center"><svg aria-hidden="true"><use href="#i-logo"></use></svg><div><p style="line-height: 1">Diwali Dhamaka</p><p class="tag">Diye on. Mic on. Full dhamaka.</p></div></div>
       <p class="made">Made with ghee, fairy lights &amp; one very loud speaker.</p>
@@ -752,6 +774,7 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 const CONFIG = {
   dateLabel: "Friday, 30 October 2026",
   timeLabel: "8:00 PM onwards",
+  pot: "₹3,500 per person",
   timeNote: "Party late tak chalegi, kyunki 12 baje humaari didiiiii ka bday hai 🎂",
   venue: "6th Floor, Daujee's, Civil Lines, Raipur",
   venueNote: "",
@@ -774,10 +797,10 @@ const CONFIG = {
   let seed = 11; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
 
   /* ---------- config ---------- */
-  const CFGMAP = { date: CONFIG.dateLabel, time: CONFIG.timeLabel, timeNote: CONFIG.timeNote, venue: CONFIG.venue, venueNote: CONFIG.venueNote };
+  const CFGMAP = { pot: CONFIG.pot, date: CONFIG.dateLabel, time: CONFIG.timeLabel, timeNote: CONFIG.timeNote, venue: CONFIG.venue, venueNote: CONFIG.venueNote };
   $$("[data-cfg]").forEach((n) => { n.textContent = CFGMAP[n.dataset.cfg] || ""; if (!n.textContent) n.hidden = true; });
   const fmt = (iso) => new Date(iso).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-  ["#cal-1", "#cal-2"].forEach((id) => { const a = $(id); if (CONFIG.start) { const end = CONFIG.end || new Date(new Date(CONFIG.start).getTime() + 5 * 36e5).toISOString(); a.href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent("Diwali Dhamaka (and Didi's midnight bday)") + "&dates=" + fmt(CONFIG.start) + "/" + fmt(end) + "&location=" + encodeURIComponent(isPh(CONFIG.venue) ? "" : CONFIG.venue) + "&details=" + encodeURIComponent("Traditional but comfy. Bring your karaoke voice. Cake at 12 AM."); } else { a.setAttribute("aria-disabled", "true"); a.title = "Date coming soon"; } });
+  ["#cal-1", "#cal-2"].forEach((id) => { const a = $(id); if (CONFIG.start) { const end = CONFIG.end || new Date(new Date(CONFIG.start).getTime() + 5 * 36e5).toISOString(); a.href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent("Diwali Dhamaka (and Didi's midnight bday)") + "&dates=" + fmt(CONFIG.start) + "/" + fmt(end) + "&location=" + encodeURIComponent(isPh(CONFIG.venue) ? "" : CONFIG.venue) + "&details=" + encodeURIComponent("Traditional but comfy. Bring your karaoke voice. Cake at 12 AM. Party Pot: " + CONFIG.pot + "."); } else { a.setAttribute("aria-disabled", "true"); a.title = "Date coming soon"; } });
   const mq = CONFIG.mapsQuery || (isPh(CONFIG.venue) ? "" : CONFIG.venue);
   if (mq) $("#map-1").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(mq); else { $("#map-1").setAttribute("aria-disabled", "true"); $("#map-1").title = "Address coming soon"; }
 
@@ -788,19 +811,6 @@ const CONFIG = {
   function rays(svg, n, w) { let d = ""; for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI * 2, b = a + w; d += `M100 100 L${(100 + Math.cos(a) * 100).toFixed(2)} ${(100 + Math.sin(a) * 100).toFixed(2)} L${(100 + Math.cos(b) * 100).toFixed(2)} ${(100 + Math.sin(b) * 100).toFixed(2)} Z `; } el("path", { d, fill: "currentColor" }, svg); }
   rays($("#gate-rays"), 24, Math.PI / 24 * .9); rays($("#sun-rays"), 36, Math.PI / 36);
   const beads = $("#beads"); [60, 80, 100, 120, 140, 160, 180].forEach((x) => el("ellipse", { cx: x, cy: (166 - Math.pow((x - 120) / 60, 2) * 7.5).toFixed(2), rx: 4.5, ry: 8 }, beads));
-
-  // marigold heap (photo-like) for the arch
-  const heap = $("#heap");
-  const shades = ["#F47721", "#F58A1F", "#E8650F", "#FF9A2E", "#F26B1D", "#FFB02E"];
-  for (let i = 0; i < 10; i++) { const x = rnd() * 400, y = rnd() * 340; el("path", { d: `M${x.toFixed(1)} ${y.toFixed(1)} q14 -20 30 0 q-14 20 -30 0z`, fill: "#2F6B1F", stroke: "#173B0E", "stroke-width": 1, transform: `rotate(${Math.round(rnd() * 360)} ${x.toFixed(1)} ${y.toFixed(1)})` }, heap); }
-  function ruffle(cx, cy, r, base) {
-    const g = el("g", { transform: `translate(${cx.toFixed(1)} ${cy.toFixed(1)}) rotate(${Math.round(rnd() * 360)})` }, heap);
-    el("circle", { r: (r * 1.02).toFixed(1), fill: "#7A2E05", opacity: .55 }, g);
-    for (let ring = 0; ring < 5; ring++) { const rr = r * (1 - ring * .19), n = 18 - ring * 3; for (let k = 0; k < n; k++) { const a = (k / n) * Math.PI * 2 + ring * .37, x = Math.cos(a) * rr * .6, y = Math.sin(a) * rr * .6; el("ellipse", { cx: x.toFixed(1), cy: y.toFixed(1), rx: (rr * .36).toFixed(1), ry: (rr * .24).toFixed(1), transform: `rotate(${(a * 57.3 + 90).toFixed(0)} ${x.toFixed(1)} ${y.toFixed(1)})`, fill: ring === 4 ? "#E8650F" : shades[(k * 7 + ring + base) % shades.length], stroke: "#9A3A08", "stroke-width": .9 }, g); el("path", { d: `M${(x - Math.sin(a) * rr * .2).toFixed(1)} ${(y + Math.cos(a) * rr * .2).toFixed(1)} Q${(x + Math.cos(a) * rr * .3).toFixed(1)} ${(y + Math.sin(a) * rr * .3).toFixed(1)} ${(x + Math.sin(a) * rr * .2).toFixed(1)} ${(y - Math.cos(a) * rr * .2).toFixed(1)}`, fill: "none", stroke: "#FFC56B", "stroke-width": 1.1, opacity: .7 }, g); } }
-    el("circle", { r: (r * .16).toFixed(1), fill: "#C2410C" }, g);
-  }
-  for (let row = 0; row < 6; row++) for (let col = 0; col < 7; col++) ruffle(col * 66 + (row % 2) * 33 - 8 + rnd() * 12, row * 62 + rnd() * 12, 40 + rnd() * 14, Math.floor(rnd() * 6));
-  for (let i = 0; i < 6; i++) { const x = rnd() * 400, y = 40 + rnd() * 280; el("path", { d: `M${x.toFixed(1)} ${y.toFixed(1)} q12 -16 26 -2 q-10 16 -26 2z`, fill: "#2F7A26", stroke: "#173B0E", "stroke-width": 1.2, transform: `rotate(${Math.round(rnd() * 360)} ${x.toFixed(1)} ${y.toFixed(1)})` }, heap); }
 
   // marquee
   const words = [["Diye on", 0], ["mic on", 1], ["Full Diwali dhamaka", 0], ["kaju katli", 1], ["midnight cake", 0], ["karaoke till late", 1], ["Ghar pe dhamaka hai", 0]];
@@ -867,6 +877,7 @@ const CONFIG = {
     gate.classList.add("exit"); document.body.classList.remove("locked"); done.add("diya");
     if (lenis) { lenis.start(); lenis.scrollTo(0, { immediate: true }); } else scrollTo(0, 0);
     setTimeout(() => { rail.classList.add("show"); renderPills(); }, reduce ? 0 : 450);
+    setTimeout(() => { archWrap.classList.add("on"); playVid(); }, reduce ? 0 : 500);
     setTimeout(() => { gate.hidden = true; if (!opened) { opened = true; watch(); } const t = $("#invite-title"); t.setAttribute("tabindex", "-1"); t.focus({ preventScroll: true }); }, reduce ? 0 : 900);
   }
   function light() {
@@ -1051,12 +1062,24 @@ const CONFIG = {
     const dl = $("#summary"); dl.innerHTML = "";
     const add = (k, build) => { const d = document.createElement("div"); d.className = "item"; const dt = document.createElement("dt"); dt.textContent = k; const dd = document.createElement("dd"); build(dd); d.append(dt, dd); dl.appendChild(d); };
     add("When", (dd) => { dd.textContent = CONFIG.dateLabel + " · " + CONFIG.timeLabel; const f = document.createElement("small"); f.className = "foot"; f.textContent = CONFIG.timeNote; dd.appendChild(f); });
+    add("Party Pot", (dd) => (dd.textContent = CONFIG.pot));
     add("Where", (dd) => { dd.textContent = CONFIG.venue; const f = document.createElement("small"); f.className = "foot"; f.textContent = CONFIG.venueNote; if (CONFIG.venueNote) dd.appendChild(f); });
     add("Your fit", (dd) => { if (fit === null) { const a = document.createElement("a"); a.href = "#fit"; a.textContent = "Not picked yet — choose a colour"; a.addEventListener("click", (e) => { e.preventDefault(); go("fit"); }); dd.appendChild(a); } else { const f = FITS[fit]; dd.append(f.name); const dot = document.createElement("span"); dot.className = "dot"; dot.style.background = f.bg; dd.appendChild(dot); const s = document.createElement("span"); s.className = "ed"; s.textContent = " · " + f.colour; dd.appendChild(s); } });
     add("RSVP", (dd) => { if (!R.submitted) { const b = document.createElement("button"); b.type = "button"; b.textContent = "Not yet — RSVP now"; b.addEventListener("click", openRSVP); dd.appendChild(b); } else dd.textContent = statusLabel(); });
     add("Persona", (dd) => (dd.textContent = R.submitted ? persona()[0] : "Unlocks after your RSVP"));
     $("#finale-rsvp").textContent = R.submitted ? "Edit my RSVP" : "RSVP now";
   }
+
+  // partners
+  const PARTNERS = [["Venue partner", "Daujee"], ["Event partner", "1857"], ["Insurance partner", "Sahi Bima"], ["Tech partner", "Allevia AI"], ["Furniture partner", "Qraa"], ["Decor partner", "Grace Floral"], ["Gifting partner", "Quem"], ["Accessories partner", "Solt"], ["Steel partner", "Sky TMT"], ["Reliable partner", "Reliable Industrial Solutions"]];
+  PARTNERS.forEach(([k, v]) => { const d = document.createElement("div"), dt = document.createElement("dt"), dd = document.createElement("dd"); dt.textContent = k; dd.textContent = v; d.append(dt, dd); $("#credits").appendChild(d); });
+
+  // arch video: plays once the diya is lit, pauses off-screen, tap for sparkles
+  const vid = $("#heap"), archWrap = $(".arch-wrap");
+  const playVid = () => { if (!reduce) { const p = vid.play(); if (p && p.catch) p.catch(() => {}); } };
+  new IntersectionObserver((es) => es.forEach((e) => { if (!opened) return; e.isIntersecting ? playVid() : vid.pause(); }), { threshold: .15 }).observe(vid);
+  const sparkle = (e) => { const r = $(".arch").getBoundingClientRect(), x = e && e.clientX ? e.clientX : r.left + r.width / 2, y = e && e.clientY ? e.clientY : r.top + r.height * .3; pop(x, y, 70); };
+  $(".arch").addEventListener("click", sparkle); $("#spark-btn").addEventListener("click", (e) => { e.stopPropagation(); sparkle(); });
 
   // countdown to start
   const cd = $("#count"), t0 = new Date(CONFIG.start).getTime();
