@@ -254,7 +254,7 @@ svg { display: block; }
 @media (min-width: 1024px) { .fit-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; } .fit-grid .cards { grid-column: span 7; } .fit-grid .fit-side { grid-column: span 5; position: sticky; top: 112px; } }
 .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 @media (min-width: 640px) { .cards { gap: 20px; } }
-@media (min-width: 768px) { .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 768px) { .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .card { position: relative; width: 100%; text-align: left; aspect-ratio: 4 / 5; border-radius: 20px; border: 3px solid var(--ink); overflow: hidden; box-shadow: 4px 4px 0 var(--ink); transition: transform .2s, box-shadow .2s; }
 .card:hover { transform: translateY(-4px); box-shadow: 6px 6px 0 var(--ink); }
 .card[aria-pressed="true"] { transform: translateY(-6px); box-shadow: 8px 8px 0 var(--ink); }
@@ -273,6 +273,8 @@ svg { display: block; }
 .card .cl { font-family: var(--editorial); font-style: italic; font-weight: 700; font-size: 16px; margin-top: 4px; }
 .card .ln { display: none; font-size: 14px; font-weight: 600; margin-top: 6px; opacity: .9; line-height: 1.35; }
 @media (min-width: 640px) { .card .cl { font-size: 18px; } .card .ln { display: block; } }
+/* 8 colours: four across on desktop, so give the cards more of the row and tighter type */
+@media (min-width: 1024px) { .fit-grid .cards { grid-column: span 8; } .fit-grid .fit-side { grid-column: span 4; } .card .in { padding: 14px; } .card h3 { font-size: clamp(1.1rem, 1.5vw, 1.45rem); } .card .cl { font-size: 14px; } .card .ln { display: none; } .card .ico { width: 46px; height: 46px; } .card .ico svg { width: 32px; height: 32px; } }
 .card .chk { position: absolute; top: 12px; left: 50%; translate: -50% 0; display: none; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--haldi); color: var(--ink); border: 2px solid var(--ink); }
 .card .chk svg { width: 20px; height: 20px; }
 .card[aria-pressed="true"] .chk { display: grid; animation: pop .35s cubic-bezier(.34,1.56,.64,1); }
@@ -997,7 +999,9 @@ const CONFIG = {
     pista: '<svg viewBox="0 0 60 60" aria-hidden="true"><path d="M30 8 L52 30 L30 52 L8 30Z" fill="#8BC34A" stroke="#171714" stroke-width="2.5" stroke-linejoin="round"></path><path d="M30 18 L42 30 L30 42 L18 30Z" fill="#FFF0D2" stroke="#171714" stroke-width="2.5" stroke-linejoin="round"></path><path d="M26 28 l3 -3 l3 3 l-3 3z M32 32 l3 -3 l3 3 l-3 3z" fill="#2E9E4F"></path></svg>',
     mor: '<svg viewBox="0 0 60 60" aria-hidden="true"><path d="M30 56 C12 40 14 14 30 6 C46 14 48 40 30 56Z" fill="#087F8C" stroke="#171714" stroke-width="2.5" stroke-linejoin="round"></path><ellipse cx="30" cy="26" rx="9" ry="11" fill="#FFC928" stroke="#171714" stroke-width="2.5"></ellipse><ellipse cx="30" cy="27" rx="4.5" ry="6" fill="#075B36" stroke="#171714" stroke-width="2.5"></ellipse></svg>',
     lotus: '<svg viewBox="0 0 60 60" aria-hidden="true"><path d="M30 50 C18 40 18 24 30 12 C42 24 42 40 30 50Z" fill="#F22978" stroke="#171714" stroke-width="2.5" stroke-linejoin="round"></path><path d="M30 50 C16 50 6 40 6 28 C18 30 26 38 30 50Z" fill="#FFF0D2" stroke="#171714" stroke-width="2.5" stroke-linejoin="round"></path><path d="M30 50 C44 50 54 40 54 28 C42 30 34 38 30 50Z" fill="#FFF0D2" stroke="#171714" stroke-width="2.5" stroke-linejoin="round"></path></svg>',
-    kesar: '<svg viewBox="0 0 60 60" aria-hidden="true"><path d="M10 44 C22 52 38 52 50 44 L46 36 H14Z" fill="#FFF0D2" stroke="#171714" stroke-width="2.5" stroke-linejoin="round"></path><ellipse cx="30" cy="36" rx="16" ry="4" fill="#FFC928" stroke="#171714" stroke-width="2.5"></ellipse><path d="M22 30 C24 22 26 16 30 10 M30 30 C30 22 32 16 36 12 M38 30 C36 24 38 18 42 14" fill="none" stroke="#D92720" stroke-width="3" stroke-linecap="round"></path></svg>'
+    kesar: '<svg viewBox="0 0 60 60" aria-hidden="true"><path d="M10 44 C22 52 38 52 50 44 L46 36 H14Z" fill="#FFF0D2" stroke="#171714" stroke-width="2.5" stroke-linejoin="round"></path><ellipse cx="30" cy="36" rx="16" ry="4" fill="#FFC928" stroke="#171714" stroke-width="2.5"></ellipse><path d="M22 30 C24 22 26 16 30 10 M30 30 C30 22 32 16 36 12 M38 30 C36 24 38 18 42 14" fill="none" stroke="#D92720" stroke-width="3" stroke-linecap="round"></path></svg>',
+    rasmalai: '<svg viewBox="0 0 60 60" aria-hidden="true"><path d="M8 30 C10 45 20 51 30 51 C40 51 50 45 52 30Z" fill="#F6E7B0" stroke="#171714" stroke-width="2.5" stroke-linejoin="round"></path><ellipse cx="30" cy="30" rx="22" ry="5" fill="#FFF8E7" stroke="#171714" stroke-width="2.5"></ellipse><ellipse cx="23" cy="27" rx="8" ry="3.5" fill="#FFFDF5" stroke="#171714" stroke-width="2"></ellipse><ellipse cx="37" cy="26" rx="8" ry="3.5" fill="#FFFDF5" stroke="#171714" stroke-width="2"></ellipse><path d="M21 26 l2 -1 M36 25 l2 1 M28 29 h2" stroke="#2E9E4F" stroke-width="2" stroke-linecap="round"></path></svg>',
+    jamun: '<svg viewBox="0 0 60 60" aria-hidden="true"><path d="M8 32 C10 46 20 52 30 52 C40 52 50 46 52 32Z" fill="#FFF0D2" stroke="#171714" stroke-width="2.5" stroke-linejoin="round"></path><circle cx="23" cy="28" r="8" fill="#3A1B12" stroke="#171714" stroke-width="2.5"></circle><circle cx="37" cy="27" r="8" fill="#3A1B12" stroke="#171714" stroke-width="2.5"></circle><path d="M19 25 q2 -2 4 -1 M33 24 q2 -2 4 -1" stroke="#FFF0D2" stroke-width="2" stroke-linecap="round" fill="none"></path><path d="M8 32 H52" stroke="#171714" stroke-width="2.5"></path></svg>'
   };
   const FITS = [
     { name: "Sindoori Laal", colour: "Poster Red", line: "Shaadi-season energy, party-season comfort.", conf: "Sindoori Laal it is. Main character, obviously.", bg: "#D92720", fg: "#FFF0D2", pat: "stripes", pc: "#FFF0D2", icon: "sindoor" },
@@ -1005,7 +1009,9 @@ const CONFIG = {
     { name: "Pista Barfi", colour: "Bottle Green", line: "Sweet, nutty, impossible to ignore.", conf: "Pista Barfi it is. Classy with a crunch.", bg: "#075B36", fg: "#FFF0D2", pat: "chevron", pc: "#FFF0D2", icon: "pista" },
     { name: "Neelkanth", colour: "Peacock Teal", line: "Main-character entry, every single time.", conf: "Neelkanth it is. Feathers fully out.", bg: "#087F8C", fg: "#FFF0D2", pat: "scales", pc: "#FFF0D2", icon: "mor" },
     { name: "Rani Pink", colour: "Hot Pink", line: "Loud outfit, louder karaoke.", conf: "Rani Pink it is. The mic is already yours.", bg: "#F22978", fg: "#171714", pat: "flowers", pc: "#171714", icon: "lotus" },
-    { name: "Kesar Pista", colour: "Saffron Orange", line: "Rich like the kheer, warm like the vibe.", conf: "Kesar Pista it is. Warm, rich, sorted.", bg: "#F47721", fg: "#171714", pat: "diamonds", pc: "#171714", icon: "kesar" }
+    { name: "Kesar Pista", colour: "Saffron Orange", line: "Rich like the kheer, warm like the vibe.", conf: "Kesar Pista it is. Warm, rich, sorted.", bg: "#F47721", fg: "#171714", pat: "diamonds", pc: "#171714", icon: "kesar" },
+    { name: "Rasmalai", colour: "Ivory", line: "Soft, elegant, quietly the best thing in the room.", conf: "Rasmalai it is. Understated and unforgettable.", bg: "#FFF8E7", fg: "#171714", pat: "scales", pc: "#B8862B", icon: "rasmalai" },
+    { name: "Kala Jamun", colour: "Midnight Black", line: "Dark, rich and dangerously smooth.", conf: "Kala Jamun it is. Black never misses.", bg: "#171714", fg: "#FFF0D2", pat: "diamonds", pc: "#FFC928", icon: "jamun" }
   ];
   let patN = 0; const patSvg = (key, c) => { const id = "pat" + (patN++); return `<defs>${PATS[key].replace('id="P"', `id="${id}"`).replace(/"C"/g, `"${c}"`)}</defs><rect width="100%" height="100%" fill="url(#${id})"></rect>`; };
   const cardsEl = $("#cards"), fitName = $("#fit-name");
