@@ -1134,7 +1134,7 @@ const CONFIG = {
     if (!CONFIG.rsvpEmail) { setSend("", "Last step: send it to me on WhatsApp so you're on the list."); return; }
     setSend("", "Sending…");
     try {
-      const res = await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(CONFIG.rsvpEmail), { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(payload()) });
+      const res = await fetch("https://formsubmit.co/ajax/" + CONFIG.rsvpEmail, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(payload()) });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || String(data.success) === "false") throw new Error(data.message || res.status);
       R.sent = true; save(); setSend("ok", "✓ Sent. You're on the list!");
